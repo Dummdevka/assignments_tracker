@@ -9,7 +9,8 @@ class Assignments extends Controller{
     }
 
     public function get(){
-        echo "get assignments!";
+        echo "get method!";
+        $this->view->render('assignment/index.php');
     }
 
     public function add(){
