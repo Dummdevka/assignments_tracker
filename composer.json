@@ -1,0 +1,21 @@
+{
+    "name": "dummdevka/assignments_tracker",
+    "autoload": {
+        "classmap": [
+            "app/controllers",
+            "app/models",
+            "app/router"
+        ],
+        "files": [
+            "app/router/Router.php"
+        ]
+
+    },
+    "authors": [
+        {
+            "name": "Dummdevka",
+            "email": "87282400+Dummdevka@users.noreply.github.com"
+        }
+    ],
+    "require": {}
+}
