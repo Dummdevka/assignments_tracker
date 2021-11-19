@@ -6,10 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<?php MAIN_CSS ?> ">
     <title>Assignments tracker</title>
+    
 </head>
 <body>
     <?php
-        require_once $page;
+        require_once $page . '.php';
     ?>
 </body>
 </html>

@@ -1,3 +1,3 @@
 <?php
 var_dump($vars);
-echo "START PAGE";
+echo "GET PAGE";

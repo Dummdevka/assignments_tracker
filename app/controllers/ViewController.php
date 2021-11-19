@@ -10,7 +10,7 @@ class View{
     }
 
     //Rendering pages [by default main page]
-    public function render($page = 'main/start.php', $vars = []){
+    public function render($page = 'main/start', $vars = []){
         require_once $this->layout;
     }
 

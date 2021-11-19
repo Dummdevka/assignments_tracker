@@ -1,5 +1,4 @@
 <?php
-
 require_once 'Controller.php';
 
 class Assignments extends Controller{
@@ -9,12 +8,16 @@ class Assignments extends Controller{
     }
 
     public function get(){
-        echo "get method!";
-        $this->view->render('assignment/index.php');
+        $this->view->render('main/start');
+
     }
 
     public function add(){
-        echo "add assignments!";
+        $this->view->render('assignment/index');
 
+    }
+
+    public function send(){
+        $this->name('control');
     }
 }

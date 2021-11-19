@@ -2,4 +2,9 @@
 
 //Here goes the page
 
-echo "assignments index page!";
+echo "ADD page!";
+?>
+
+<form action="send" method="get">
+    <button type="submit">Click me!</button>
+</form>

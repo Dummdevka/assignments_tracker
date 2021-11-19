@@ -2,7 +2,7 @@
 
 //Here all the routes will be listed
 
-return [
+return $routes = [
     '/assignments/get' => [
         'class' => 'Assignments',
         'method' => 'get',
@@ -12,3 +12,4 @@ return [
         'method' => 'add',
     ],
 ];
+
