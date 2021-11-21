@@ -4,12 +4,15 @@ require_once 'ViewController.php';
 abstract class Controller{
     public $view;
     public $names;
-    public function __construct()
+    public $db;
+
+    public function __construct(Array $names, Object $db)
     {
         $this->view = new View();
-
+        $this->db = $db;
         //Bootstrapping route names
-        $this->names = require_once(BASEDIR . DS . 'app' . DS . 'config' . DS . 'routes_names.php');
+        $this->names = $names;
+        // $this->names = require_once(BASEDIR . DS . 'app' . DS . 'config' . DS . 'routes_names.php');
     }
 
     //Routing by names

@@ -2,13 +2,14 @@
 require_once 'Controller.php';
 
 class Assignments extends Controller{
-    public function __construct()
+    public function __construct($names, $db)
     {
-        parent::__construct();
+        parent::__construct($names, $db);
     }
 
     public function get(){
-        $this->view->render('main/start');
+        $data = $this->db->get('vg_assignments', 'title');
+        $this->view->render('main/start', $data);
 
     }
 

@@ -6,13 +6,14 @@
 class Router
 {
     public $routes;
-    public function __construct(Array $routes)
+    public function __construct(Array $config)
     {   
-        $this->routes = $routes;
+        $this->routes = $config['routes'];
+        $this->names = $config['names'];
     }
 
     //Running the appliacation
-    public function run($query)
+    public function run($query, object $db)
     {
     
         //Iterate through the array
@@ -24,7 +25,7 @@ class Router
             if(preg_match($regex, $query)){
                 if(class_exists($vals['class'])){
                     //Creating the class
-                    $class = new $vals['class'];
+                    $class = new $vals['class']($this->names, $db);
 
                     if ( method_exists($class, $vals['method'])) {
 
