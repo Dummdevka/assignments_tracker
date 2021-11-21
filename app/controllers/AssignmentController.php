@@ -8,7 +8,7 @@ class Assignments extends Controller{
     }
 
     public function get(){
-        $data = $this->db->get('vg_assignments', 'title');
+        $data = $this->assignment->create(['subject'=>'Chemistry', 'title'=>'Ass5', 'description'=>'blahbalh']);
         $this->view->render('main/start', $data);
 
     }

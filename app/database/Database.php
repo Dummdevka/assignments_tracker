@@ -19,12 +19,6 @@ class Database{
 
     }
     public function connect(){
-
-        $opt = [
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING,
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_CLASS,
-            PDO::ATTR_CASE => PDO::CASE_NATURAL
-        ];
         try{
             $dsn = 'pgsql:host=' . $this->host. 
                     ';port=' . $this->port .
@@ -32,7 +26,10 @@ class Database{
                             ';user=' . $this->user . 
                                 ';password=' . $this->password;
 
-            $conn = new PDO($dsn, $opt);
+            $conn = new PDO($dsn);
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
+            $conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+            $conn->setAttribute(PDO::ATTR_CASE, PDO::CASE_NATURAL);
 
             return $conn;
         } catch(PDOException $e){
@@ -41,20 +38,58 @@ class Database{
         }
         
     }
-    //Create
-    public function create($table, $values){
-        $sql = 'insert into' . $table . 'values' . $values;
+    //Used to form additional conditions
+    public function condition($cond){
+        $where_str = ''; //String for additional sql
 
+            foreach($cond as $col=>$val){
+                $where_str .= empty($where_str) ? ' ' : ' and '; //Connecting conditions
+
+                $where_str .= $col . "=:" . $col; //Forming prepared statement
+                
+                $cond[':' . $col] = $cond[$col]; //Reseting keys
+                unset($cond[$col]);
+            }
+            return $where_str;
     }
+    
     //Read
-    public function get($table, $params = '*'){
+    public function get($table, $params = '*', $cond = []) //params - what you want to select
+    {
 
         $sql = 'select ' . $params. ' from ' . $table;
-        $res = $this->connect()->query($sql);
         
-        return $res->fetchAll();
-    }
+        if(!empty($cond)) //Additional conditions
+        {
+            $where_str = $this->condition($cond);
 
+            $sql .= ' where' .$where_str; //Add condition
+
+            $stmt = $this->connect()->prepare($sql);
+            $stmt->execute($cond); //Execute prepared statement
+            $res = $stmt->fetchAll(); //Fetch results
+
+        } else{
+            $res = $this->connect()->query($sql)->fetchAll(); //Get all ids
+        }
+        return $res;
+
+    }
+    //Create
+    public function create($table, $fields, $values){
+        //var_dump($table, $values, $fields);
+        $vals = '';
+        $fields1 = explode(',', $fields);
+        foreach($fields1 as $field){
+            //$vals .= empty($vals) ? '' : ',';
+            $vals .= ':' . $field;
+        }
+        
+        $sql = 'insert into ' . $table . '(' . $fields . ') ' . 'values' . $vals;
+        var_dump($sql);
+        $stmt = $this->connect()->prepare($sql);
+        return $stmt->execute($values);
+    }
     //Update
 
     //Delete

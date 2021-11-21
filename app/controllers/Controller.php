@@ -1,18 +1,20 @@
 <?php
 require_once 'ViewController.php';
+require_once BASEDIR . DS . 'app/models/Assignment.php';
 
 abstract class Controller{
-    public $view;
-    public $names;
-    public $db;
+    public $view; //ViewController to render pages
+    public $names; //Routes names array
+    //public $db; //Database connection
+    public $assignment; //Assignment model
 
     public function __construct(Array $names, Object $db)
     {
         $this->view = new View();
-        $this->db = $db;
+        $this->assignment = new Assignment($db);
+        //$this->db = $db;
         //Bootstrapping route names
         $this->names = $names;
-        // $this->names = require_once(BASEDIR . DS . 'app' . DS . 'config' . DS . 'routes_names.php');
     }
 
     //Routing by names
