@@ -24,6 +24,7 @@ class Router
             
             if(preg_match($regex, $query)){
                 if(class_exists($vals['class'])){
+
                     //Creating the class
                     $class = new $vals['class']($this->names, $db);
 
@@ -32,15 +33,16 @@ class Router
                         //Calling the method
                         $method = $vals['method'];
                         $class->$method();
+
                     }else{
                         var_dump("No func");
                     }
                 } else{
                     var_dump("No class");
                 }
-            }
-            header("HTTP/1.1 404 Not Found");
+            } 
         }
-
+            header('HTTP/1.0 404 Not Found');
+             exit;
 }
 }

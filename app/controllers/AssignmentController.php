@@ -6,15 +6,22 @@ class Assignments extends Controller{
     {
         parent::__construct($names, $db);
     }
-
+    public function home(){
+        $this->view->render('main/home');
+    }
     public function get(){
-        $data = $this->assignment->create(['subject'=>'Chemistry', 'title'=>'Ass5', 'description'=>'blahbalh']);
+        $arr = [
+            'subject' => 'Math'
+        ];
+
+        $data = $this->assignment->id($arr);
         $this->view->render('main/start', $data);
 
     }
 
     public function add(){
-        $this->view->render('assignment/index');
+        //$this->view->render('assignment/index');
+        $this->name('main');
 
     }
 

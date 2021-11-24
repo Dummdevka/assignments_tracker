@@ -39,11 +39,11 @@ class Database{
         
     }
     //Used to form additional conditions
-    public function condition($cond){
+    public function condition($cond, $join){
         $where_str = ''; //String for additional sql
 
             foreach($cond as $col=>$val){
-                $where_str .= empty($where_str) ? ' ' : ' and '; //Connecting conditions
+                $where_str .= empty($where_str) ? ' ' : $join; //Connecting conditions
 
                 $where_str .= $col . "=:" . $col; //Forming prepared statement
                 
@@ -58,12 +58,10 @@ class Database{
     {
 
         $sql = 'select ' . $params. ' from ' . $table;
-        
         if(!empty($cond)) //Additional conditions
         {
-            $where_str = $this->condition($cond);
-
-            $sql .= ' where' .$where_str; //Add condition
+            $where_str = $this->condition($cond, ' and ');
+            $sql .= ' where ' .$where_str; //Add condition
 
             $stmt = $this->connect()->prepare($sql);
             $stmt->execute($cond); //Execute prepared statement
@@ -75,22 +73,40 @@ class Database{
         return $res;
 
     }
+
     //Create
-    public function create($table, $fields, $values){
-        //var_dump($table, $values, $fields);
+    public function create($table, $fields, $values) 
+    {
+        //Forming prepared statement
         $vals = '';
         $fields1 = explode(',', $fields);
         foreach($fields1 as $field){
-            //$vals .= empty($vals) ? '' : ',';
-            $vals .= ':' . $field;
+            $vals .= empty($vals) ? '' : ', ';
+            $vals .= ':' . trim($field);
         }
-        
-        $sql = 'insert into ' . $table . '(' . $fields . ') ' . 'values' . $vals;
-        var_dump($sql);
+
+        //Query
+        $sql = 'insert into ' . $table . '(' . $fields . ') ' . 'values' . '(' .$vals .')';
         $stmt = $this->connect()->prepare($sql);
         return $stmt->execute($values);
     }
-    //Update
 
+    //Update
+    public function update($table , $id, $vals)
+    {
+        $str = $this->condition($vals, ',');
+       
+        $vals['id'] = $id;
+
+        $sql = 'update ' . $table . ' set ' . $str . $col . ' where id=:id';
+        $stmt = $this->connect()->prepare($sql);
+        return $stmt->execute($vals);
+    }
     //Delete
+    public function delete($table, $id)
+    {
+        $sql = 'delete from ' . $table . ' where id=:id';
+        $stmt = $this->connect()->prepare($sql);
+        return $stmt->execute([':id'=>$id]);
+    }
 }

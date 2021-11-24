@@ -8,9 +8,15 @@ define('MAIN_CSS', BASEDIR . DS . 'public' . DS . 'assets' . DS . 'styles.css');
 
 //Autoloader
 require_once 'vendor/autoload.php';
-//Load routes
-$routes = require_once 'app/config/routes.php';
+//Load config
+$config = require_once 'app/config/config.php';
 
+//Include Database
+$db = new Database($config['database']);
+//$dbh = $db->connect();
+
+
+//Rendering html
 $view = new View();
 
 //Rendering main page
@@ -18,10 +24,11 @@ $view = new View();
 
 
 //Routing
-$router = new Router($routes);
-$router->run(($_SERVER['REQUEST_URI']));
+$router = new Router($config);
+$router->run(($_SERVER['REQUEST_URI']), $db);
+
 //Pass it to Router->run()
 //Include Router
 
-//Include Database
+
 

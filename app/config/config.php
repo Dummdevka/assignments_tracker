@@ -14,6 +14,7 @@ return $config = array(
 
 //Routes
     'routes' => [
+        
         '/assignments/get' => [
             'class' => 'Assignments',
             'method' => 'get',
@@ -22,12 +23,17 @@ return $config = array(
             'class' => 'Assignments',
             'method' => 'add',
         ],
+        '/' => [
+            'class' => 'Assignments',
+            'method' => 'home',
+        ],
     ],
 
 
 //Names for routes
     'names' => [
         'main' => '/',
-        'control' => '/assignments/get'
+        'control' => '/assignments/get',
+        'new' => '/assignments/add'
     ],
 );
