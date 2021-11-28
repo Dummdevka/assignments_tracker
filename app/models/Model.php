@@ -1,13 +1,16 @@
 <?php
 
-abstract class Model{
+abstract class Model
+{
     protected $db;
     protected $table_name;
+
     public function __construct($db)
     {
         $this->db = $db;
         $this->table_name = 'vg_' . lcfirst(get_class($this)) . 's'; //Used for universal columns (id, time)
     }
+
     public function form_cond(Array $cond){
         $arr = array();
         foreach ($cond as $stmt){
@@ -16,6 +19,7 @@ abstract class Model{
         }
         return $arr;
     }
+
     public function id($cond = []) //Returns an array od ids
     {
         // 

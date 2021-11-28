@@ -1,8 +1,6 @@
 <?php
 
-
-
-//Routering the site
+//Routing the site ;P
 class Router
 {
     public $routes;
@@ -12,12 +10,11 @@ class Router
         $this->names = $config['names'];
     }
 
-    //Running the appliacation
+    //Running the application
     public function run($query, object $db)
     {
-    
         //Iterate through the array
-        foreach ($this->routes as $route => $vals){
+        foreach ($this->routes as $route => $vals) {
 
             //Regular exp out of route array keys
             $regex = '#^\/[^/]*\\' . $route . '$#';
@@ -34,15 +31,16 @@ class Router
                         $method = $vals['method'];
                         $class->$method();
 
-                    }else{
+                    } else {
                         var_dump("No func");
                     }
-                } else{
+                } else {
                     var_dump("No class");
                 }
             } 
         }
-            header('HTTP/1.0 404 Not Found');
-             exit;
-}
+        // Route to a default error page?
+        header('HTTP/1.0 404 Not Found');
+        exit;
+    }
 }
