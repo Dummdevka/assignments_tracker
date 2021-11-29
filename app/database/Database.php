@@ -97,8 +97,9 @@ class Database{
         $str = $this->condition($vals, ',');
        
         $vals['id'] = $id;
-
-        $sql = 'update ' . $table . ' set ' . $str . $col . ' where id=:id';
+        // var_dump($vals);
+        // exit();
+        $sql = 'update ' . $table . ' set ' . $str . ' where id=:id';
         $stmt = $this->connect()->prepare($sql);
         return $stmt->execute($vals);
     }

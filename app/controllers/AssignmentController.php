@@ -14,7 +14,9 @@ class Assignments extends Controller{
             'subject' => 'Math'
         ];
 
-        $data = $this->assignment->id($arr);
+        $data = $this->assignment->id();
+       
+        
         $this->view->render('main/start', $data);
 
     }

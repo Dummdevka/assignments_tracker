@@ -8,14 +8,10 @@ abstract class Model{
         $this->db = $db;
         $this->table_name = 'vg_' . lcfirst(get_class($this)) . 's'; //Used for universal columns (id, time)
     }
-    public function form_cond(Array $cond){
-        $arr = array();
-        foreach ($cond as $stmt){
-            $str = $stmt[0] . $stmt[1] . $stmt[2];
-            array_push($arr, $str);
-        }
-        return $arr;
-    }
+   public function get_all(){
+       $all_data = $this->db->get($this->table_name);
+       return $all_data;
+   }
     public function id($cond = []) //Returns an array od ids
     {
         // 
