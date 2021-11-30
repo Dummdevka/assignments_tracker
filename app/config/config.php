@@ -30,6 +30,10 @@ return $config = array(
         '/delete' => [
             'class' => 'Assignments',
             'method' => 'delete'
+        ],
+        '/add' => [
+            'class' => 'Assignments',
+            'method' => 'add'
         ]
     ],
 

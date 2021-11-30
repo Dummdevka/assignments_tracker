@@ -11,6 +11,7 @@ function ajax(method, url, callback, post_str = false)
              //Success
             if(request.status == 200) {
                 //What you want to do
+                console.log(request.responseText);
                 callback();
             }
             else if(request.status == 400) {
@@ -27,20 +28,3 @@ function ajax(method, url, callback, post_str = false)
     post_str ? request.send(post_str) : request.send(); 
 }
 
-let del = document.getElementsByClassName("ass-delete");
-
-for (let i = 0; i < del.length; i++) {
-	del[i].addEventListener("click", function (e) 
-    {
-        //GEt id and parent element
-        let id = e.target.value;
-        let assignment = e.target.parentElement;
-
-        //Call ajax
-        ajax('delete', '/assignments_tracker/delete?id=' + id, 
-        function() {
-            //Remove the block on the frontend
-            assignment.remove();
-        });
-    })
-};

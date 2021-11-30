@@ -22,17 +22,20 @@ class Assignments extends Controller{
     }
 
     public function add(){
-        $tasks = [
-            'subject' => 'Math',
-            'title' => 'Some Ass',
-            'description' => 'Some desc',
-            
-        ];
-        //$this->view->render('assignment/index');
-        for($i=0;$i<9;$i++){
-            $this->assignment->create($tasks);
-        }
+        //Validate the inputs
+        //...
+        $title = trim($_POST['title']);
+        $subject = trim($_POST['sublect']);
+        $description = trim($_POST['description']);
 
+        $new_ass = [
+            'title' => $title,
+            'subject' => $subject,
+            'description' => $description
+        ];
+        $this->assignment->create($new_ass);
+
+        $this->name('control');
     }
 
     public function send(){
