@@ -13,21 +13,44 @@ class Assignments extends Controller{
         $arr = [
             'subject' => 'Math'
         ];
-
-        $data = $this->assignment->id();
-       
+        
+        //$data = $this->assignment->create($tasks);
+       $data = $this->assignment->get_all();
         
         $this->view->render('main/start', $data);
 
     }
 
     public function add(){
+        $tasks = [
+            'subject' => 'Math',
+            'title' => 'Some Ass',
+            'description' => 'Some desc',
+            
+        ];
         //$this->view->render('assignment/index');
-        $this->name('main');
+        for($i=0;$i<9;$i++){
+            $this->assignment->create($tasks);
+        }
 
     }
 
     public function send(){
         $this->name('control');
     }
+    public function delete(){
+
+        //If no id had been passed
+        if(empty($_GET['id'])){
+            $this->name('control');
+            http_response_code(404);
+            exit;
+        }
+
+        //Deleting 
+        $id = $_GET['id'];
+        $this->assignment->delete($id);
+        echo $id;
+    }
 }
+

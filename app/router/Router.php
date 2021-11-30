@@ -20,7 +20,7 @@ class Router
         foreach ($this->routes as $route => $vals){
 
             //Regular exp out of route array keys
-            $regex = '#^\/[^/]*\\' . $route . '$#';
+            $regex = '#^\/[^/]*\\' . $route . '(\?|$)#';
             
             if(preg_match($regex, $query)){
                 if(class_exists($vals['class'])){
@@ -33,7 +33,7 @@ class Router
                         //Calling the method
                         $method = $vals['method'];
                         $class->$method();
-
+                        return true;
                     }else{
                         var_dump("No func");
                     }
@@ -42,6 +42,8 @@ class Router
                 }
             } 
         }
+        // var_dump($regex, $query);
+        // exit();
             header('HTTP/1.0 404 Not Found');
              exit;
 }

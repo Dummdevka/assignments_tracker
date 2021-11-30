@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<?php MAIN_CSS ?> ">
     <title>Assignments tracker</title>
-    
+    <script type="text/javascript" data-main="/assignments_tracker/public/assets/scripts/main" 
+    src="/assignments_tracker/public/assets/scripts/require.js"></script>
+
 
 </head>
 <body>
@@ -14,7 +16,6 @@
     <?php
         require_once $page . '.php';
     ?>
-<!-- <script type="text/javascript" data-main="public/assets/scripts/main" src="public/assets/scripts/require.js"></script> -->
 </body>
 </html>
 

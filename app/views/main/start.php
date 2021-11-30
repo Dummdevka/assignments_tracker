@@ -6,20 +6,21 @@
 <br>
 <br>
 <?php
+
+
 foreach ($vars as $ass){
     ?>
-    <div>
+    <div id="ass-data">
+        <div class="ass-info">
         <?php echo $ass->title?>
         <?php echo $ass->subject?>
         <?php echo $ass->description ?>
+        </div>
+        <button class="ass-delete" value="<?php echo $ass->id; ?>">Delete</button>
 
     </div>
-    <button onclick="XMLDoc()">Delete</button>
     <br>
     <br>
     <?php
 }
 
-//Delete - Ajax call <?php echo $ass->title; ?>, 'delete', '/assignments/delete'
-//Add - Ajax call
-//Add tailwind with composer
