@@ -1,3 +1,6 @@
-body{
-    background: #777;
-}
+
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;

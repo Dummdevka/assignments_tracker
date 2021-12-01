@@ -28,7 +28,7 @@ document.getElementById("assig_search").addEventListener('keyup', function(e)
     let req = e.target.value.toUpperCase();
 
     //Look through Elements in DOM
-    let assig_info = document.getElementsByClassName("assig-info");
+    let assig_info = document.getElementsByClassName("assig-data");
     for (let i=0; i<assig_info.length; i++)
     {
         let block = assig_info[i].textContent || assig_info[i].innerText;
