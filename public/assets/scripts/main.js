@@ -22,19 +22,22 @@ for (let i = 0; i < del.length; i++) {
     })
 };
 
-//Adding
-// document.getElementById("assig-add")
-// .addEventListener('click', function(e) 
-// {
-//     //console.log(e);
-//     //Get Title
-//     let title = document.getElementById("assig_title").value;
-//     //Get Subject
-//     let subject = document.getElementById("assig_subject").value;
-//     //Get Description
-//     let description = document.getElementById("assig_desc").value;
-//     let post_str = 'title=' + title + '&subject=' + subject + '&description=' + description;
+//Browse through assignments
+document.getElementById("assig_search").addEventListener('keyup', function(e)
+{
+    let req = e.target.value.toUpperCase();
 
-//     //Send POST request
-//     ajax('post', '/assignments_tracker/add', function() { console.log("cool");}, post_str);
-// })
+    //Look through Elements in DOM
+    let assig_info = document.getElementsByClassName("assig-info");
+    for (let i=0; i<assig_info.length; i++)
+    {
+        let block = assig_info[i].textContent || assig_info[i].innerText;
+
+        if(block.toUpperCase().indexOf(req) > -1) {
+            assig_info[i].style.display = '';
+        } else{
+            assig_info[i].style.display = "none";
+        }
+    }
+    //If something is equal -> console.log it
+})

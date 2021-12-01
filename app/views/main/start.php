@@ -6,6 +6,14 @@
 </form>
 <br>
 <br>
+<div id="assig_browse">
+<input type="search" name="" id="assig_search">
+
+</div>
+
+<br>
+<br>
+<div id="assig-list">
 <?php
 
 
@@ -16,12 +24,14 @@ foreach ($vars as $assig){
         <?php echo $assig->title?>
         <?php echo $assig->subject?>
         <?php echo $assig->description ?>
-        </div>
+     
         <button class="assig-delete" value="<?php echo $assig->id; ?>">Delete</button>
-
+        </div>
     </div>
-    <br>
-    <br>
     <?php
-}
+} ?>
+</div>
+    <br>
+    <br>
+
 

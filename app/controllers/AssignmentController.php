@@ -25,7 +25,7 @@ class Assignments extends Controller{
         //Validate the inputs
         //...
         $title = trim($_POST['title']);
-        $subject = trim($_POST['sublect']);
+        $subject = trim($_POST['subject']);
         $description = trim($_POST['description']);
 
         $new_ass = [
