@@ -27,13 +27,31 @@ class Assignments extends Controller{
         $title = trim($_POST['title']);
         $subject = trim($_POST['subject']);
         $description = trim($_POST['description']);
-
+        
+        //Validate the picture
+        //Convert to 64-encoding
+        //Save to db
+        //$this->attachment->create(id, pic);
         $new_ass = [
             'title' => $title,
             'subject' => $subject,
             'description' => $description
         ];
-        $this->assignment->create($new_ass);
+        
+        if(!empty($_FILES)) 
+        {
+            $attachment = $_FILES['ass_file']['name'];
+            $attachment_path = $_FILES['ass_file']['tmp_name'];
+            //Add task and add attachment
+            $enc = base64_encode($attachment_path . '/' . $attachment);
+            $this->assignment->with_attachment($new_ass, $enc);
+            
+        } else{
+             //Last inserted id
+            $id = $this->assignment->create($new_ass);
+            
+        }
+       
 
         $this->name('control');
     }

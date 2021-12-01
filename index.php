@@ -1,6 +1,6 @@
 <?php
 ini_set('error_reporting', E_ALL);
-
+ini_set('display_errors', 1);
 define('DS', DIRECTORY_SEPARATOR);
 define('BASEDIR', __DIR__);
 define('BASEURL', '/assignments_tracker');

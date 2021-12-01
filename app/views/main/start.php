@@ -1,4 +1,4 @@
-<form action="/assignments_tracker/add" method="post"
+<form action="/assignments_tracker/add" method="post" enctype="multipart/form-data"
 class="flex flex-col mt-8 rounded-md p-2 mb-8">
     <input type="text" name="title" id="assig_title" placeholder="Title"
     class="h-8 border-b mb-2">
@@ -6,6 +6,7 @@ class="flex flex-col mt-8 rounded-md p-2 mb-8">
     class="h-8 border-b mb-2">
     <textarea placeholder="Description" name="description" id="assig_desc" cols="20" rows="8"
     class="h-28 border rounded-sm text-md p-1 mb-2"></textarea>
+    <input type="file" name="ass_file" id="" class="mb-2">
     <button type="submit" id="assig-add"
     class="bg-blue-400 h-7 rounded-sm">Add</button>
 </form>

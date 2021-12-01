@@ -75,20 +75,27 @@ class Database{
     }
 
     //Create
+    //Fields - STRING of col names separated with a ,
+    //Values - ARRAY col=>val
     public function create($table, $fields, $values) 
     {
+        //var_dump($table, $fields, $values);
+
         //Forming prepared statement
         $vals = '';
         $fields1 = explode(',', $fields);
+        
         foreach($fields1 as $field){
             $vals .= empty($vals) ? '' : ', ';
             $vals .= ':' . trim($field);
         }
-
         //Query
-        $sql = 'insert into ' . $table . '(' . $fields . ') ' . 'values' . '(' .$vals .')';
+        $sql = 'insert into ' . $table . '(' . $fields . ') ' . 'values' . '(' .$vals .') returning id';
         $stmt = $this->connect()->prepare($sql);
-        return $stmt->execute($values);
+        $stmt->execute($values);
+        $res =  $stmt->fetchColumn();
+        return $res;
+
     }
 
     //Update

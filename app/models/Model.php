@@ -34,7 +34,7 @@ abstract class Model{
             $vals[':' . $field] = $vals[$field];
             unset($vals[$field]);
         }
-        $this->db->create($this->table_name, $fields, $vals);
+        return $this->db->create($this->table_name, $fields, $vals);
     }
     
     //Update row (by id)
