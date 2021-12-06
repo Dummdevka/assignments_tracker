@@ -4,7 +4,10 @@ function ajax(method, url, callback, post_str = false)
 {
     //Define new object
     let request = new XMLHttpRequest;
-
+    if(method == 'post')
+    {
+        request.setRequestHeader('Content-Type', 'multipart/form-data');
+    }
     //When the response is ready
     request.onreadystatechange = function() {
         if(request.readyState == request.DONE){
@@ -12,7 +15,7 @@ function ajax(method, url, callback, post_str = false)
             if(request.status == 200) {
                 //What you want to do
                 console.log(request.responseText);
-                callback();
+                callback(request.responseText);
             }
             else if(request.status == 400) {
                 alert('There has been an error');

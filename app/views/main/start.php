@@ -6,7 +6,6 @@ class="flex flex-col mt-8 rounded-md p-2 mb-8">
     class="h-8 border-b mb-2">
     <textarea placeholder="Description" name="description" id="assig_desc" cols="20" rows="8"
     class="h-28 border rounded-sm text-md p-1 mb-2"></textarea>
-    <input type="file" name="ass_file" id="" class="mb-2">
     <button type="submit" id="assig-add"
     class="bg-blue-400 h-7 rounded-sm">Add</button>
 </form>
@@ -24,13 +23,25 @@ class="w-full flex flex-col">
 
 foreach ($vars as $assig){
     ?>
-    <div class="assig-data flex items-center justify-between h-10 bg-gray-200 mb-2 rounded-sm pl-1 border">
-        <div class="assig-info">
-        <?php echo $assig->title?>
-        <?php echo $assig->subject?>
-        <?php echo $assig->description ?>
+    <div class="assig-data flex items-center justify-between h-10 bg-gray-200 mb-2 rounded-sm pl-1 border cursor-pointer">
+        <div class="assig-info 
+        flex">
+        <p id="title" class="assig-str
+        mr-5">        
+            <?php echo $assig->title?>
+        </p>
+        <p id="subject" class="assig-str 
+        mr-5">        
+            <?php echo $assig->subject?>
+        </p>
+        <p id="description" class="assig-str
+        mr-5 text-xs text-gray-500 ">        
+            <?php echo $assig->description?>
+        </p>
+        
+        
         </div>
-        <button class="assig-delete h-7 w-20 rounded-sm bg-red-400 mr-2" value="<?php echo $assig->id; ?>">Delete</button>
+        <button id="assig-delete" class="h-7 w-20 rounded-sm bg-red-400 mr-2" value="<?php echo $assig->id; ?>">Delete</button>
         
     </div>
     <?php

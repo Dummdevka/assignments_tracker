@@ -33,4 +33,13 @@ abstract class Controller{
         header('Location: ' . BASEURL . $route );
         exit;
     }
+    
+    //Parse php://input
+    public function get_post()
+    {
+        $rawPostData = file_get_contents("php://input");
+        $postData = array();
+        parse_str($rawPostData, $postData);
+        return $postData;
+    }
 }

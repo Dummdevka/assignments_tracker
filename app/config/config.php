@@ -34,6 +34,10 @@ return $config = array(
         '/add' => [
             'class' => 'Assignments',
             'method' => 'add'
+        ],
+        '/edit' => [
+            'class' => 'Assignments',
+            'method' => 'edit'
         ]
     ],
 

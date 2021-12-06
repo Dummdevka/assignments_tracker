@@ -9,13 +9,15 @@ class Assignments extends Controller{
     public function home(){
         $this->view->render('main/home');
     }
-    public function get(){
+
+    public function get()
+    {
         $arr = [
             'subject' => 'Math'
         ];
-        
-        //$data = $this->assignment->create($tasks);
-       $data = $this->assignment->get_all();
+
+        //Get all the assignments
+        $data = $this->assignment->get_all();
         
         $this->view->render('main/start', $data);
 
@@ -28,29 +30,15 @@ class Assignments extends Controller{
         $subject = trim($_POST['subject']);
         $description = trim($_POST['description']);
         
-        //Validate the picture
-        //Convert to 64-encoding
-        //Save to db
-        //$this->attachment->create(id, pic);
+        
         $new_ass = [
             'title' => $title,
             'subject' => $subject,
             'description' => $description
         ];
+        //Last inserted id
+        $id = $this->assignment->create($new_ass);
         
-        if(!empty($_FILES)) 
-        {
-            $attachment = $_FILES['ass_file']['name'];
-            $attachment_path = $_FILES['ass_file']['tmp_name'];
-            //Add task and add attachment
-            $enc = base64_encode($attachment_path . '/' . $attachment);
-            $this->assignment->with_attachment($new_ass, $enc);
-            
-        } else{
-             //Last inserted id
-            $id = $this->assignment->create($new_ass);
-            
-        }
        
 
         $this->name('control');
@@ -72,6 +60,16 @@ class Assignments extends Controller{
         $id = $_GET['id'];
         $this->assignment->delete($id);
         echo $id;
+    }
+    public function edit()
+    {
+        $id = $_GET['id'];
+        //Get request info
+        $postData = $this->get_post();
+        //Validate input
+        //Update assignment
+        $this->assignment->update($id, $postData);
+        echo array_values($postData)[0];
     }
 }
 

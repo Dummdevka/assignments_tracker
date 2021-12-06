@@ -22,22 +22,6 @@ class Assignment extends Model{
     public function description(){
 
     }
-    public function with_attachment($vals, $file){
-        try {
-            
-            //Create task
-            $id = $this->create($vals);
-
-            $fields = 'ass_id, url';
-            $file_data = ['url'=>$file, 'ass_id'=>$id];
-
-            //Create attachent
-            $this->db->create('vg_attachments', $fields, $file_data);
-
-        }
-        catch (Exception $e) {
-            echo $e->getMessage();
-            exit();
-        }
-    }
+    
 }
+
