@@ -48,7 +48,7 @@ for (let i = 0; i < del.length; i++) {
   del[i].addEventListener("click", deleteFunc);
 }
 
-function deleteFunc(event) {
+function deleteFunc(e) {
   //GEt id and parent element
   let id = e.target.value;
   let assignment = e.target.parentElement;
@@ -61,7 +61,7 @@ function deleteFunc(event) {
 }
 
 function editFunc(e) {
-  let update = document.querySelector(".assig-edit");
+  let update = e.target.parentElement.querySelector(".assig-edit");
   let name = update.name;
   let input = update.value;
   let id = e.target.value;

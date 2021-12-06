@@ -20,6 +20,9 @@ function ajax(method, url, callback, post_str = false)
             else if(request.status == 400) {
                 alert('There has been an error');
             }
+            else if(request.status == 422) {
+                alert('Invalid data');
+            }
             else {
                 //Debug mode only!!
                 alert(request.status);

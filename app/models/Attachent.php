@@ -1,6 +1,6 @@
 <?php
 
-require_once 'Model.php';
+require_once 'app/Core/Model.php';
 
 
 class Attachment extends Model{

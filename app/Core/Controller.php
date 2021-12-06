@@ -1,5 +1,5 @@
 <?php
-require_once 'ViewController.php';
+require_once 'app/Core/ViewController.php';
 require_once BASEDIR . DS . 'app/models/Assignment.php';
 
 abstract class Controller{
@@ -42,4 +42,5 @@ abstract class Controller{
         parse_str($rawPostData, $postData);
         return $postData;
     }
+
 }

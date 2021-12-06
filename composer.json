@@ -4,11 +4,11 @@
         "classmap": [
             "app/controllers",
             "app/models",
-            "app/router",
+            "app/Core",
             "app/database"
         ],
         "files": [
-            "app/router/Router.php"
+            "app/Core/Router.php"
         ]
 
     },

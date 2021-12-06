@@ -1,5 +1,5 @@
 <?php
-require_once 'Controller.php';
+require_once 'app/Core/Controller.php';
 
 class Assignments extends Controller{
     public function __construct($names, $db)
@@ -25,23 +25,25 @@ class Assignments extends Controller{
 
     public function add(){
         //Validate the inputs
-        //...
         $title = trim($_POST['title']);
         $subject = trim($_POST['subject']);
         $description = trim($_POST['description']);
-        
-        
-        $new_ass = [
-            'title' => $title,
-            'subject' => $subject,
-            'description' => $description
-        ];
-        //Last inserted id
-        $id = $this->assignment->create($new_ass);
-        
-       
+        if(!empty(trim($title))&&
+        !empty(trim($subject))&&
+        !empty(trim($description)))
+        {
+            $new_ass = [
+                'title' => $title,
+                'subject' => $subject,
+                'description' => $description
+            ];
+            //Last inserted id
+            $id = $this->assignment->create($new_ass);
+            
+        }
 
         $this->name('control');
+        
     }
 
     public function send(){
@@ -53,7 +55,6 @@ class Assignments extends Controller{
         if(empty($_GET['id'])){
             $this->name('control');
             http_response_code(404);
-            exit;
         }
 
         //Deleting 
@@ -67,9 +68,15 @@ class Assignments extends Controller{
         //Get request info
         $postData = $this->get_post();
         //Validate input
-        //Update assignment
-        $this->assignment->update($id, $postData);
-        echo array_values($postData)[0];
+        if(!empty($id) && !empty($postData)) 
+        {
+            //Update assignment
+            $this->assignment->update($id, $postData);
+            echo array_values($postData)[0];
+        } else {
+            http_response_code(422);
+        }
+        
     }
 }
 

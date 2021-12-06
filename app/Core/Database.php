@@ -22,9 +22,9 @@ class Database{
         try{
             $dsn = 'pgsql:host=' . $this->host. 
                     ';port=' . $this->port .
-                        ';dbname=' . $this->db . 
-                            ';user=' . $this->user . 
-                                ';password=' . $this->password;
+                    ';dbname=' . $this->db . 
+                    ';user=' . $this->user . 
+                    ';password=' . $this->password;
 
             $conn = new PDO($dsn);
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
