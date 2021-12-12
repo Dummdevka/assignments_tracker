@@ -1,7 +1,5 @@
 <?php
 
-
-
 //Routering the site
 class Router
 {
@@ -15,13 +13,12 @@ class Router
     //Running the appliacation
     public function run($query, object $db)
     {
-    
-        //Iterate through the array
-        foreach ($this->routes as $route => $vals){
+        // Iterate through the array
+        foreach ($this->routes as $route => $vals) {
 
-            //Regular exp out of route array keys
+            // Regular exp out of route array keys
             $regex = '#^\/[^/]*\\' . $route . '(\?|$)#';
-            
+
             if(preg_match($regex, $query)){
                 if(class_exists($vals['class'])){
 
@@ -29,22 +26,19 @@ class Router
                     $class = new $vals['class']($this->names, $db);
 
                     if ( method_exists($class, $vals['method'])) {
-
                         //Calling the method
                         $method = $vals['method'];
-                        $class->$method();
-                        return true;
-                    }else{
+                        return $class->$method();
+                    } else {
                         var_dump("No func");
                     }
-                } else{
+                } else {
                     var_dump("No class");
                 }
             } 
         }
         // var_dump($regex, $query);
         // exit();
-            header('HTTP/1.0 404 Not Found');
-             exit;
-}
+        return false; // because we want to handle this later...
+    }
 }
