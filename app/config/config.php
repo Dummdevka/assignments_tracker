@@ -14,7 +14,25 @@ return $config = array(
 
 //Routes
     'routes' => [
-        
+        // GET, POST, PUT, DELETE
+        // CRUD - Create, Read, Update, Delete
+        /*
+            Create - POST
+            Read - GET
+            Update - PUT
+            Delete - DELETE
+        */
+
+        /*
+            /assignments/get/?id=12
+            /assignments/edit/?id=12
+            /assignments/delete/?id=4
+        */
+
+        '/' => [
+            'class' => 'Assignments',
+            'method' => 'home',
+        ],
         '/assignments/get' => [
             'class' => 'Assignments',
             'method' => 'get',
@@ -23,19 +41,11 @@ return $config = array(
             'class' => 'Assignments',
             'method' => 'add',
         ],
-        '/' => [
-            'class' => 'Assignments',
-            'method' => 'home',
-        ],
-        '/delete' => [
+        '/assignments/delete' => [
             'class' => 'Assignments',
             'method' => 'delete'
         ],
-        '/add' => [
-            'class' => 'Assignments',
-            'method' => 'add'
-        ],
-        '/edit' => [
+        '/assignments/edit' => [
             'class' => 'Assignments',
             'method' => 'edit'
         ]
